@@ -16,6 +16,12 @@ Pair **once per boot**, tap Start desktop, and the phone’s own desktop fills t
 
 <br/>
 
+<img src="docs/screenshots/demo.gif" width="360" alt="InnerDesk starting desktop on a Fold and using it"/>
+
+<p><sub>Galaxy Z Fold — start desktop, type, then stop. Clip is sped up.</sub></p>
+
+<br/>
+
 <img src="docs/screenshots/02.png" width="280" alt="Unfolded fullscreen desktop"/>&nbsp;
 <img src="docs/screenshots/03.png" width="280" alt="Tabletop desktop with trackpad"/>&nbsp;
 <img src="docs/screenshots/07.png" width="280" alt="InnerDesk home"/>&nbsp;
