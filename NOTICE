@@ -1,0 +1,59 @@
+InnerDesk
+=========
+
+Copyright (C) 2026 Alexandru and the InnerDesk contributors.
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU Affero General Public License as published by the Free
+Software Foundation, either version 3 of the License, or (at your option) any
+later version. See the LICENSE file for the full text.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.
+
+--------------------------------------------------------------------------------
+Why AGPL-3.0
+--------------------------------------------------------------------------------
+
+InnerDesk is original work (not inherited from an AGPL upstream). AGPL-3.0 is a
+deliberate choice so that anyone who redistributes InnerDesk — or runs a
+modified version as a network-accessible service (including the telemetry
+Worker in this repository) — must make the complete corresponding source
+available under the same license and preserve the copyright and attribution
+notices in this file.
+
+--------------------------------------------------------------------------------
+Copyright holders
+--------------------------------------------------------------------------------
+
+Copyright is held by the respective authors of each contribution:
+
+ * InnerDesk original code (app, privileged daemon, overlay/mirror, input,
+   telemetry Worker, documentation): Copyright (C) 2026 Alexandru and the
+   InnerDesk contributors.
+
+--------------------------------------------------------------------------------
+Third-party dependencies (fetched at build time, not vendored)
+--------------------------------------------------------------------------------
+
+ * AndroidX libraries (core-ktx, appcompat, constraintlayout, lifecycle,
+   window) .............................................. Apache License 2.0
+ * Material Components for Android ....................... Apache License 2.0
+ * libadb-android (wireless debugging pairing) ........... Apache-2.0 or GPL-3.0-or-later
+   Copyright 2021 Muntashir Al-Islam. InnerDesk uses the Apache-2.0 option.
+   Upstream: https://github.com/MuntashirAkon/libadb-android
+ * Shizuku API / provider (optional privileged path) ..... Apache License 2.0
+   Copyright RikkaW / RikkaApps.
+   Upstream: https://github.com/RikkaApps/Shizuku
+ * Conscrypt (TLS for wireless ADB) ...................... Apache License 2.0
+ * Bouncy Castle (bcpkix) ................................ MIT License
+
+--------------------------------------------------------------------------------
+Trademarks
+--------------------------------------------------------------------------------
+
+Samsung, DeX, Google, Android, and related names are trademarks of their
+respective owners. InnerDesk is an independent, unofficial project and is not
+affiliated with, endorsed by, or sponsored by any of them. These names are used
+only to describe interoperability.

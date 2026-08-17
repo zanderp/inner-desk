@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_background_off"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/widget_logo"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/widget_label"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_logo" />
+
+    <ImageView
+        android:id="@+id/widget_power"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="4dp"
+        android:layout_weight="2"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/widget_label"
+        android:scaleType="fitCenter"
+        android:src="@drawable/widget_power_btn" />
+</LinearLayout>

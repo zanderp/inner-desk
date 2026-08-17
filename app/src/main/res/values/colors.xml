@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="id_bg">#080B10</color>
+    <color name="id_card">#121821</color>
+    <color name="id_stroke">#2A3442</color>
+    <color name="id_accent">#5AA8FF</color>
+    <color name="id_text">#F4F7FB</color>
+    <color name="id_muted">#93A0B3</color>
+    <color name="id_log">#0C1016</color>
+    <color name="id_log_text">#B7C2D0</color>
+    <color name="id_cursor">#E6FFFFFF</color>
+    <color name="id_launcher_bg">#0B1220</color>
+    <color name="id_power">#D45F55</color>
+</resources>

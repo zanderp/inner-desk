@@ -1,0 +1,33 @@
+# Gradle / Android
+.gradle/
+build/
+/app/build/
+local.properties
+.cxx/
+.externalNativeBuild/
+.kotlin/
+/captures/
+
+# IDE
+.idea/
+*.iml
+.DS_Store
+
+# Built artifacts — ship via GitHub Releases
+*.apk
+*.aab
+*.ap_
+*.hprof
+
+# Telemetry Worker local
+/telemetry/node_modules/
+/telemetry/.wrangler/
+/telemetry/.dev.vars
+
+# Local working notes — never publish
+/docs/work/
+
+# Keystores
+*.jks
+*.keystore
+keystore.properties

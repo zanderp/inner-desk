@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.InnerDesk" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+        <item name="android:windowBackground">@color/id_bg</item>
+        <item name="android:colorBackground">@color/id_bg</item>
+        <item name="colorPrimary">@color/id_accent</item>
+        <item name="colorOnPrimary">@color/id_bg</item>
+        <item name="colorSurface">@color/id_card</item>
+        <item name="colorOnSurface">@color/id_text</item>
+        <item name="android:textColor">@color/id_text</item>
+        <item name="android:textColorSecondary">@color/id_muted</item>
+    </style>
+</resources>

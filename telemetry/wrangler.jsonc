@@ -1,0 +1,13 @@
+{
+  "name": "innerdesk-telemetry",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-08-17",
+  "workers_dev": true,
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "innerdesk-telemetry",
+      "database_id": "b2f23178-672b-475b-9161-d533c57137b5"
+    }
+  ]
+}
