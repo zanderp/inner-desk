@@ -102,13 +102,22 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/connectionHint"
+                            android:id="@+id/setupBody"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:lineSpacingExtra="3dp"
-                            android:text="Enable Wireless debugging once per boot, enter the PIN here, then Start desktop."
+                            android:text="@string/setup_body"
                             android:textColor="@color/id_muted"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/connectionHint"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:lineSpacingExtra="3dp"
+                            android:textColor="@color/id_accent"
                             android:textSize="14sp" />
 
                         <com.google.android.material.button.MaterialButton
@@ -118,6 +127,17 @@
                             android:layout_height="52dp"
                             android:layout_marginTop="14dp"
                             android:text="@string/open_wireless_debug"
+                            android:textAllCaps="false"
+                            app:cornerRadius="14dp"
+                            app:strokeColor="@color/id_stroke" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnAccessibility"
+                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="52dp"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/open_accessibility"
                             android:textAllCaps="false"
                             app:cornerRadius="14dp"
                             app:strokeColor="@color/id_stroke" />

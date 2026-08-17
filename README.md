@@ -2,9 +2,9 @@
 
 # InnerDesk
 
-### Wireless Samsung DeX, Google Desktop, or OEM desktop mode — on your phone.
+### Samsung DeX or Pixel desktop — on your phone.
 
-Pair **once per boot**, tap Start desktop, and the phone’s own desktop fills this screen.
+Pair **once per boot**, tap Start desktop, and that desktop fills this screen.
 
 <br/>
 
@@ -52,7 +52,7 @@ Pair **once per boot**, tap Start desktop, and the phone’s own desktop fills t
 
 ---
 
-Independent community project. Tested on Galaxy Z Fold and on regular phones (S25 Ultra class). If your phone can already run DeX, Android 16 desktop, or another OEM desktop, InnerDesk puts that desktop on the phone itself. Use at your own risk.
+Independent community project. Supported today: **Pixel** (Android 16 desktop) and **Samsung** (One UI 8 DeX). Tested on Galaxy Z Fold and regular Samsung phones (S25 Ultra class). Other devices later. Use at your own risk.
 
 ---
 
@@ -60,7 +60,7 @@ Independent community project. Tested on Galaxy Z Fold and on regular phones (S2
 
 | | |
 | --- | --- |
-| **Desktop on this screen** | Samsung DeX, Android desktop, or your OEM’s desktop mode — running on your phone. |
+| **Desktop on this screen** | Samsung DeX or Pixel Android 16 desktop — running on the phone itself. |
 | **Quick Settings tile** | Add InnerDesk next to Wi-Fi and DeX. Tap to start or stop desktop — not a notification. |
 | **Home-screen widget** | Resizable tile with the InnerDesk logo and a red power button. Same start/stop. |
 | **Folds** | Unfolded, it fills the inner screen. Half-open tabletop puts the desktop on top and a trackpad on the bottom; the keyboard opens over the pad. |
@@ -73,21 +73,32 @@ Independent community project. Tested on Galaxy Z Fold and on regular phones (S2
 
 ## What you need
 
-- A phone that already has a **desktop mode** — DeX, Android 16 desktop, or whatever your OEM calls the “put a desktop on a monitor” feature. InnerDesk uses that same desktop on the phone’s own screen.
+- **Pixel** on **Android 16**, or **Samsung** on **One UI 8** (Android 16) with DeX.
 - The InnerDesk APK from [Releases](https://github.com/zanderp/inner-desk/releases/latest) (F-Droid listing: see [docs/fdroid.md](docs/fdroid.md)).
-- The InnerDesk **accessibility service**, when the app asks.
-- **Developer options → Wireless debugging**, once this boot.
 
-No root. After the daemon is up you can turn Wireless debugging off. You only pair again after a reboot.
+No root. Other phones are not supported yet.
 
-## Getting started
+## One-time setup
 
-1. Install the APK and open InnerDesk. Allow notifications and the accessibility service.
-2. Turn on Wireless debugging. In InnerDesk tap **Wireless debugging** and pair with the 6-digit code (the notification can fill it in).
-3. When it says **Privileged daemon ready**, tap **Start desktop**.
-4. On a regular phone, that’s it — the desktop fills the screen. Side arrow → Close desktop / Desktop settings / Tabletop.
-5. On a Fold, unfolded is fullscreen. Half-open tabletop keeps the desktop on the upper half, with trackpad and Left / keyboard / Right on the lower half.
-6. Optional: pull down Quick Settings → edit → add **InnerDesk**, or long-press the home screen → Widgets → **InnerDesk desktop**.
+Do this the first time you install InnerDesk. After a reboot you only **pair again** (step 6).
+
+1. **Install** the APK and open InnerDesk.
+2. **Notifications** — allow them when Android asks (Android 13+). InnerDesk uses them for pairing and the “desktop on” session.
+3. **Display over other apps** — allow InnerDesk when the system screen appears. Needed for the session HUD.
+4. **Unrestricted battery** — allow “Ignore battery optimizations” / unrestricted battery so the privileged daemon is not killed.
+5. **Accessibility** — Settings → Accessibility → InnerDesk → turn **on**. This is what draws the desktop fullscreen (Android caps the system overlay window at 50%).
+6. **Wireless debugging, once this boot**
+   - Settings → Developer options → **Wireless debugging** → on.
+   - Tap **Pair device with pairing code**.
+   - In InnerDesk tap **Wireless debugging**, then enter the **6-digit PIN** (the pairing notification can fill it in).
+   - Shizuku works as an alternative if you already use it.
+7. When the app says **Privileged daemon ready**, tap **Start desktop**.
+
+After the daemon is up you can turn Wireless debugging off. Pair again after every reboot.
+
+Optional: pull down Quick Settings → edit → add **InnerDesk**, or long-press the home screen → Widgets → **InnerDesk desktop**.
+
+On a regular phone the desktop fills the screen. Side arrow → Close desktop / Desktop settings / Tabletop. On a Fold, unfolded is fullscreen. Half-open tabletop keeps the desktop on the upper half, with trackpad and Left / keyboard / Right on the lower half.
 
 <p>
 <img src="docs/screenshots/03.png" width="360" alt="Tabletop: desktop on top, trackpad below"/>
@@ -99,8 +110,9 @@ Hit the same bug twice, share the log from the app, and drop it in **[Discord](h
 
 | Symptom | Try this |
 | --- | --- |
+| “Currently supports Pixel and Samsung” | This phone is not a supported Pixel (Android 16) or Samsung (One UI 8) yet. |
 | Still asking for Wireless debugging | Pair once this boot. Expand the pairing notification and type the PIN in InnerDesk. |
-| Desktop doesn’t fill the screen | Enable the InnerDesk accessibility service. Tabletop on a Fold is the top half on purpose. |
+| Desktop doesn’t fill the screen | Enable InnerDesk in Settings → Accessibility. Tabletop on a Fold is the top half on purpose. |
 | Pointer / clicks don’t reach the desktop | Daemon must be ready. Close desktop and start it again. |
 | Want a different size or sharpness | Side arrow → **Desktop settings** (DPI + resolution). |
 

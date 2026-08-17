@@ -26,6 +26,17 @@ object DesktopControls {
 
     fun start(context: Context) {
         val app = context.applicationContext
+        if (!DexStarter.detectSupport(app).supported) {
+            app.startActivity(
+                Intent(app, MainActivity::class.java)
+                    .addFlags(
+                        Intent.FLAG_ACTIVITY_NEW_TASK or
+                            Intent.FLAG_ACTIVITY_SINGLE_TOP or
+                            Intent.FLAG_ACTIVITY_REORDER_TO_FRONT,
+                    ),
+            )
+            return
+        }
         val intent = MainActivity.startDesktopIntent(app)
         if (context is TileService) {
             if (Build.VERSION.SDK_INT >= 34) {

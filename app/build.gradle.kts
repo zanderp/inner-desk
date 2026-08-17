@@ -51,7 +51,7 @@ android {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            // F-Droid signs with its own key. GitHub/IzzyOnDroid use the release keystore.
+            // F-Droid signs with its own key. GitHub Releases use the release keystore.
             signingConfig = when {
                 project.hasProperty("fdroid") -> null
                 signingConfigs.findByName("release") != null -> signingConfigs.getByName("release")

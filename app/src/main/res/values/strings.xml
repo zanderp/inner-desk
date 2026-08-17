@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">InnerDesk</string>
-    <string name="status_idle">Authorize once this boot, then Start desktop.</string>
-    <string name="setup_title">Setup</string>
+    <string name="status_idle">Finish one-time setup, pair once this boot, then Start desktop.</string>
+    <string name="setup_title">One-time setup</string>
+    <string name="setup_body">Do this once. After a reboot you only pair again.\n\n1. Allow notifications\n2. Allow display over other apps\n3. Allow unrestricted battery / ignore optimizations\n4. Enable InnerDesk in Settings → Accessibility\n5. Developer options → Wireless debugging → Pair with pairing code → enter the PIN here\n\nWhen it says Privileged daemon ready, tap Start desktop.</string>
+    <string name="open_accessibility">Accessibility</string>
     <string name="log_title">Log</string>
     <string name="open_wireless_debug">Wireless debugging</string>
     <string name="wireless_connected">Connected to Wireless debugging</string>
@@ -21,7 +23,7 @@
     <string name="pad_keyboard">Keyboard</string>
     <string name="accessibility_service_description">Draws the desktop fullscreen above the system overlay window. Required because the overlay display window is limited to 50%% of the screen by Android.</string>
     <string name="about_title">About</string>
-    <string name="about_tagline">Desktop on this screen. Not HDMI. Not a TV.</string>
+    <string name="about_tagline">Samsung DeX or Pixel desktop, on this screen. Not HDMI.</string>
     <string name="about_community">Community &amp; support</string>
     <string name="about_community_body">Questions or a log to share? Join Discord. Tips keep the project moving.</string>
     <string name="about_discord">Discord</string>

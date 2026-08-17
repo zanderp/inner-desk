@@ -119,10 +119,15 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             refreshStatus()
-            ensureDaemon(openSettingsIfNeeded = true)
+            if (DexStarter.detectSupport(this@MainActivity).supported) {
+                ensureDaemon(openSettingsIfNeeded = true)
+            }
         }
 
         binding.btnWireless.setOnClickListener { openWirelessDebug() }
+        binding.btnAccessibility.setOnClickListener {
+            startActivity(Intent(android.provider.Settings.ACTION_ACCESSIBILITY_SETTINGS))
+        }
         binding.btnPair.setOnClickListener { pairAndSpawnDaemon() }
         binding.btnStart.setOnClickListener {
             if (AppSession.dexRunning) stopDex() else startDex()
@@ -485,8 +490,14 @@ class MainActivity : AppCompatActivity() {
         binding.btnStart.isEnabled = false
         lifecycleScope.launch {
             try {
-                val kind = DexStarter.detectKind(this@MainActivity)
-                append("Starting desktop (${DexStarter.kindLabel(kind)})…")
+                val support = DexStarter.detectSupport(this@MainActivity)
+                if (!support.supported) {
+                    append(support.reason)
+                    Toast.makeText(this@MainActivity, support.reason, Toast.LENGTH_LONG).show()
+                    return@launch
+                }
+                val kind = support.kind ?: return@launch
+                append("Starting desktop (${support.label})…")
                 var shell = withContext(Dispatchers.IO) { AppSession.shell }
                 if (shell != null) {
                     append(
@@ -1000,26 +1011,35 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun refreshStatus() {
+        val support = DexStarter.detectSupport(this)
         binding.btnStart.text = if (AppSession.dexRunning) getString(R.string.stop_dex) else getString(R.string.start_dex)
         val privOk = AppSession.overlayMirror.pingAlive()
+        val a11yOn = DexOverlayService.isRunning()
         binding.status.text = when {
+            !support.supported -> support.reason
             AppSession.dexRunning && privOk -> "Desktop is on. Tap Stop desktop, or use the side arrow."
             AppSession.dexRunning -> "Desktop is on. Privileged daemon reconnecting…"
-            privOk -> "Privileged daemon ready. Start desktop."
-            else -> "Start the privileged daemon once this boot (Wireless debugging), then Start desktop."
+            privOk && a11yOn -> "Privileged daemon ready. Start desktop."
+            privOk && !a11yOn -> "Daemon ready. Enable InnerDesk in Accessibility, then Start desktop."
+            else -> "Finish one-time setup, pair Wireless debugging once this boot, then Start desktop."
         }
-        val needPair = WirelessDebugUi.pairingNeeded()
-        binding.setupCard.isVisible = !privOk || needPair
+        val needPair = support.supported && WirelessDebugUi.pairingNeeded()
+        binding.setupCard.isVisible = !support.supported || !privOk || needPair || !a11yOn
+        binding.setupBody.isVisible = support.supported
+        binding.btnWireless.isVisible = support.supported
+        binding.btnAccessibility.isVisible = support.supported
         binding.connectionHint.text = when {
+            !support.supported -> support.reason
             WirelessDebugUi.needsPairing -> "Unpaired. Open Wireless debugging → Pair with pairing code, then enter the PIN."
-            privOk -> "Daemon is running."
+            privOk && a11yOn -> "Daemon is running."
+            !a11yOn -> "Turn on InnerDesk under Settings → Accessibility."
             else -> "Tap Wireless debugging once this boot. Expand the notification and type the PIN there."
         }
         binding.btnWireless.text = getString(R.string.open_wireless_debug)
-        binding.btnWireless.isVisible = true
-        if (!needPair) {
+        binding.btnStart.isEnabled = support.supported || AppSession.dexRunning
+        if (!support.supported || !needPair) {
             hidePairingForm()
-            WirelessDebugUi.clear(this)
+            if (support.supported) WirelessDebugUi.clear(this)
         } else {
             showPairingUi()
         }
@@ -1070,6 +1090,7 @@ class MainActivity : AppCompatActivity() {
     private fun maybeStartDesktopFromIntent(intent: Intent?) {
         if (intent?.action != ACTION_START_DESKTOP) return
         if (AppSession.dexRunning) return
+        if (!DexStarter.detectSupport(this).supported) return
         binding.root.post { startDex() }
     }
 

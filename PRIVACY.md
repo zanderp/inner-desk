@@ -2,7 +2,7 @@
 
 _Last updated: 2026-08-17_
 
-InnerDesk is a **local-first** app. It puts the phone’s own desktop mode (Samsung DeX, Android desktop, or OEM desktop) on this screen. It has **no user accounts and no ads**. Session logs stay on the phone unless *you* share them.
+InnerDesk is a **local-first** app. It puts the phone’s own desktop mode (Samsung DeX or Pixel Android 16 desktop) on this screen. It has **no user accounts and no ads**. Session logs stay on the phone unless *you* share them.
 
 This document explains what the app can access, why, and where data goes.
 

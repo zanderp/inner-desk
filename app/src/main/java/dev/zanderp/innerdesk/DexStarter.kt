@@ -1,19 +1,89 @@
 package dev.zanderp.innerdesk
 
 import android.content.Context
+import android.os.Build
 
-enum class DesktopKind { SAMSUNG, ANDROID }
+enum class DesktopKind { SAMSUNG, PIXEL }
+
+data class DesktopSupport(
+    val kind: DesktopKind?,
+    val supported: Boolean,
+    val oneUi: Int,
+    val sdk: Int,
+    val reason: String,
+) {
+    val label: String
+        get() = when (kind) {
+            DesktopKind.SAMSUNG -> "One UI desktop"
+            DesktopKind.PIXEL -> "Google desktop"
+            null -> "Desktop"
+        }
+}
 
 object DexStarter {
 
-    fun detectKind(context: Context): DesktopKind {
-        val mfr = android.os.Build.MANUFACTURER.orEmpty()
-        val brand = android.os.Build.BRAND.orEmpty()
+    /** One UI 8.0 (`ro.build.version.oneui` = 80000). New DeX runs on overlay/virtual displays. */
+    const val MIN_ONE_UI = 80000
+
+    /** Android 16. Native desktop mode on a secondary display. */
+    const val MIN_ANDROID_SDK = 36
+
+    fun detectKind(context: Context): DesktopKind? = detectSupport(context).kind
+
+    fun kindLabel(kind: DesktopKind?): String = when (kind) {
+        DesktopKind.SAMSUNG -> "One UI desktop"
+        DesktopKind.PIXEL -> "Google desktop"
+        null -> "Desktop"
+    }
+
+    fun detectSupport(context: Context): DesktopSupport {
+        val sdk = Build.VERSION.SDK_INT
+        if (isSamsung(context)) {
+            val oneUi = oneUiVersion()
+            val ok = oneUi >= MIN_ONE_UI && sdk >= MIN_ANDROID_SDK
+            return DesktopSupport(
+                kind = DesktopKind.SAMSUNG,
+                supported = ok,
+                oneUi = oneUi,
+                sdk = sdk,
+                reason = if (ok) {
+                    ""
+                } else {
+                    "InnerDesk needs One UI 8 on Android 16. This phone is One UI ${formatOneUi(oneUi)} (Android ${sdkRelease()})."
+                },
+            )
+        }
+        if (isPixel()) {
+            val ok = sdk >= MIN_ANDROID_SDK
+            return DesktopSupport(
+                kind = DesktopKind.PIXEL,
+                supported = ok,
+                oneUi = 0,
+                sdk = sdk,
+                reason = if (ok) {
+                    ""
+                } else {
+                    "InnerDesk needs Android 16 desktop mode on Pixel. This phone is Android ${sdkRelease()}."
+                },
+            )
+        }
+        return DesktopSupport(
+            kind = null,
+            supported = false,
+            oneUi = 0,
+            sdk = sdk,
+            reason = "InnerDesk currently supports Pixel (Android 16 desktop) and Samsung (One UI 8 DeX). Other devices later.",
+        )
+    }
+
+    fun isSamsung(context: Context): Boolean {
+        val mfr = Build.MANUFACTURER.orEmpty()
+        val brand = Build.BRAND.orEmpty()
         if (mfr.contains("samsung", ignoreCase = true) || brand.contains("samsung", ignoreCase = true)) {
-            return DesktopKind.SAMSUNG
+            return true
         }
         val pm = context.packageManager
-        val samsungPkgs = listOf(
+        return listOf(
             "com.sec.android.app.desktoplauncher",
             "com.sec.android.desktopmode.uiservice",
         ).any { pkg ->
@@ -24,12 +94,48 @@ object DexStarter {
                 false
             }
         }
-        return if (samsungPkgs) DesktopKind.SAMSUNG else DesktopKind.ANDROID
     }
 
-    fun kindLabel(kind: DesktopKind): String = when (kind) {
-        DesktopKind.SAMSUNG -> "One UI desktop"
-        DesktopKind.ANDROID -> "Android desktop"
+    fun isPixel(): Boolean {
+        val mfr = Build.MANUFACTURER.orEmpty()
+        val brand = Build.BRAND.orEmpty()
+        val model = Build.MODEL.orEmpty()
+        return mfr.contains("google", ignoreCase = true) ||
+            brand.contains("google", ignoreCase = true) ||
+            brand.contains("pixel", ignoreCase = true) ||
+            model.contains("Pixel", ignoreCase = true)
+    }
+
+    fun oneUiVersion(): Int {
+        val prop = systemProperty("ro.build.version.oneui").toIntOrNull() ?: 0
+        if (prop > 0) return prop
+        val sem = semPlatformInt()
+        return if (sem >= 150000) sem - 100000 else 0
+    }
+
+    fun formatOneUi(version: Int): String {
+        if (version <= 0) return "unknown"
+        val major = version / 10000
+        val minor = (version / 100) % 100
+        return if (minor == 0) "$major.0" else "$major.$minor"
+    }
+
+    private fun sdkRelease(): String =
+        Build.VERSION.RELEASE.orEmpty().ifBlank { Build.VERSION.SDK_INT.toString() }
+
+    private fun semPlatformInt(): Int = try {
+        Build.VERSION::class.java.getField("SEM_PLATFORM_INT").getInt(null)
+    } catch (_: Exception) {
+        0
+    }
+
+    @Suppress("PrivateApi")
+    private fun systemProperty(key: String): String = try {
+        val c = Class.forName("android.os.SystemProperties")
+        c.getMethod("get", String::class.java, String::class.java)
+            .invoke(null, key, "") as String
+    } catch (_: Exception) {
+        ""
     }
 
     fun setDesktopFlags(shell: PrivilegedShell, kind: DesktopKind): String {
@@ -38,7 +144,7 @@ object DexStarter {
         out.append(shell.run("settings put global force_desktop_mode_on_external_displays 1")).append('\n')
         out.append(shell.run("settings put global force_allow_on_external 1")).append('\n')
         out.append(shell.run("settings put global desktop_mode_enabled 1")).append('\n')
-        if (kind == DesktopKind.ANDROID) {
+        if (kind == DesktopKind.PIXEL) {
             out.append(shell.run("settings put global enable_freeform_support 1")).append('\n')
             out.append(shell.run("settings put global force_resizable_activities 1")).append('\n')
             out.append(shell.run("settings put global enable_non_resizable_multi_window 1")).append('\n')

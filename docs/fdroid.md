@@ -21,13 +21,7 @@ Local check (optional, needs [fdroidserver](https://f-droid.org/docs/Installing_
 ./gradlew assembleRelease -Pfdroid
 ```
 
-## IzzyOnDroid
-
-[IzzyOnDroid](https://apt.izzysoft.de/fdroid/) is a third-party F-Droid repo. It is usually **faster** (days, not months) and picks up **GitHub Releases** (developer-signed APK).
-
-Request: [Codeberg IzzyOnDroid/repodata issues](https://codeberg.org/IzzyOnDroid/repodata/issues) using [`izzyondroid-request.md`](izzyondroid-request.md).
-
-They require a **release signing key** (not the Android debug keystore). Keep `keystore.properties` and `innerdesk-release.jks` backed up off-git.
+Keep `keystore.properties` and `innerdesk-release.jks` backed up off-git for GitHub Releases (F-Droid signs with its own key).
 
 ## Anti-features we are avoiding
 
