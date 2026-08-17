@@ -140,7 +140,10 @@ class MainActivity : AppCompatActivity() {
         binding.btnDonate.setOnClickListener {
             AboutActivity.openUrl(this, AboutActivity.URL_KOFI, R.string.main_donate_failed)
         }
+        UpdateUi.applyVisibility(binding.btnCheckUpdate)
+        binding.btnCheckUpdate.setOnClickListener { UpdateUi.checkManual(this) }
         maybeStartDesktopFromIntent(intent)
+        UpdateUi.maybeCheck(this)
 
         binding.touchpad.onMove = { dx, dy ->
             if (AppSession.dexRunning) DexInput.move(dx * 2.8f, dy * 2.8f)

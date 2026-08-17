@@ -1,0 +1,1 @@
+GitHub update check (Download / Skip / Later). README screen-recording GIF. F-Droid builds still skip GitHub APK prompts.

@@ -13,7 +13,7 @@ This document explains what the app can access, why, and where data goes.
 - **No account, no sign-in.** The app never asks who you are.
 - **Optional anonymous telemetry (default on).** A random UUID, app version, and (when something breaks) a redacted crash/error snippet may be sent to a Cloudflare Worker operated for this project — so we can see roughly how many phones use the app and fix crashes. Turn it off anytime under **About → Privacy → Anonymous usage & crash reports**.
 - **Your desktop session stays on the device.** Pairing PINs, logs, and overlay settings are not uploaded as their own fields.
-- Other traffic that leaves the phone (not to us as “who you are”): **Wireless debugging** pairing is a local ADB connection on this phone. Links you tap in About (Discord, GitHub, Ko-fi, website) open in your browser under those sites’ own terms.
+- Other traffic that leaves the phone (not to us as “who you are”): **Wireless debugging** pairing is a local ADB connection on this phone. GitHub-signed builds may query `api.github.com` once a day (or when you tap **Check for update**) to see if a newer APK is on Releases; F-Droid builds skip that. Links you tap in About (Discord, GitHub, Ko-fi, website) open in your browser under those sites’ own terms.
 
 ---
 

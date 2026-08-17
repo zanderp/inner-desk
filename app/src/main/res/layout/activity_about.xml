@@ -206,6 +206,17 @@
                     android:textAllCaps="false"
                     app:cornerRadius="14dp"
                     app:strokeColor="@color/id_stroke" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_about_update"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/update_check"
+                    android:textAllCaps="false"
+                    app:cornerRadius="14dp"
+                    app:strokeColor="@color/id_stroke" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 

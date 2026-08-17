@@ -45,6 +45,15 @@
     <string name="crash_share_later">Later</string>
     <string name="about_open_failed">Couldn\'t open link</string>
     <string name="main_about_credits">About &amp; credits</string>
+    <string name="update_check">Check for update</string>
+    <string name="update_checking">Checking for update…</string>
+    <string name="update_up_to_date">You\'re up to date (or offline)</string>
+    <string name="update_title">Update %1$s</string>
+    <string name="update_download">Download</string>
+    <string name="update_skip">Skip</string>
+    <string name="update_later">Later</string>
+    <string name="update_download_failed">Couldn\'t open download link</string>
+    <string name="update_fdroid">This build updates through F-Droid</string>
     <string name="main_donate_failed">Couldn\'t open donate link</string>
     <string name="tile_label">InnerDesk</string>
     <string name="tile_on">Desktop on</string>

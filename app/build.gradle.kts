@@ -13,8 +13,8 @@ android {
         applicationId = "dev.zanderp.innerdesk"
         minSdk = 31
         targetSdk = 35
-        versionCode = 50
-        versionName = "0.8.0"
+        versionCode = 51
+        versionName = "0.8.1"
         ndk {
             abiFilters += "arm64-v8a"
         }
@@ -25,6 +25,9 @@ android {
         // F-Droid builds pass -Pfdroid so telemetry is opt-in (no Tracking anti-feature).
         val telemetryDefault = if (project.hasProperty("fdroid")) "false" else "true"
         buildConfigField("boolean", "TELEMETRY_DEFAULT", telemetryDefault)
+        // F-Droid signs with its own key; do not prompt those installs to sideload GitHub APKs.
+        val githubUpdates = if (project.hasProperty("fdroid")) "false" else "true"
+        buildConfigField("boolean", "GITHUB_UPDATES", githubUpdates)
     }
 
     signingConfigs {
