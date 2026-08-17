@@ -68,7 +68,7 @@ Independent community project. Tested on Galaxy Z Fold and on regular phones (S2
 ## What you need
 
 - A phone that already has a **desktop mode** — DeX, Android 16 desktop, or whatever your OEM calls the “put a desktop on a monitor” feature. InnerDesk uses that same desktop on the phone’s own screen.
-- The InnerDesk APK from [Releases](https://github.com/zanderp/inner-desk/releases/latest).
+- The InnerDesk APK from [Releases](https://github.com/zanderp/inner-desk/releases/latest) (F-Droid listing: see [docs/fdroid.md](docs/fdroid.md)).
 - The InnerDesk **accessibility service**, when the app asks.
 - **Developer options → Wireless debugging**, once this boot.
 

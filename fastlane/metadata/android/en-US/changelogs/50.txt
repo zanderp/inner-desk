@@ -1,0 +1,1 @@
+First public F-Droid build (0.8.0). R8-minified. Setup card only when this boot still needs Wireless debugging. Desktop settings live on the side arrow once desktop is on.

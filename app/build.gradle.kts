@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -20,11 +22,25 @@ android {
             ?: System.getenv("TELEMETRY_URL")
             ?: "https://innerdesk-telemetry.hello-3d9.workers.dev"
         buildConfigField("String", "TELEMETRY_URL", "\"$telemetryUrl\"")
+        // F-Droid builds pass -Pfdroid so telemetry is opt-in (no Tracking anti-feature).
+        val telemetryDefault = if (project.hasProperty("fdroid")) "false" else "true"
+        buildConfigField("boolean", "TELEMETRY_DEFAULT", telemetryDefault)
     }
 
     signingConfigs {
         getByName("debug") {
             // Uses default debug keystore
+        }
+        val keystorePropsFile = rootProject.file("keystore.properties")
+        if (keystorePropsFile.exists()) {
+            val p = Properties()
+            keystorePropsFile.inputStream().use { p.load(it) }
+            create("release") {
+                storeFile = file(p.getProperty("storeFile"))
+                storePassword = p.getProperty("storePassword")
+                keyAlias = p.getProperty("keyAlias")
+                keyPassword = p.getProperty("keyPassword")
+            }
         }
     }
     buildTypes {
@@ -32,7 +48,12 @@ android {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            signingConfig = signingConfigs.getByName("debug")
+            // F-Droid signs with its own key. GitHub/IzzyOnDroid use the release keystore.
+            signingConfig = when {
+                project.hasProperty("fdroid") -> null
+                signingConfigs.findByName("release") != null -> signingConfigs.getByName("release")
+                else -> signingConfigs.getByName("debug")
+            }
         }
         debug {
             isMinifyEnabled = false

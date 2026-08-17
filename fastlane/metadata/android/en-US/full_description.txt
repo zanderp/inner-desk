@@ -1,0 +1,11 @@
+<p>InnerDesk puts your phone’s own desktop mode on this screen — Samsung DeX, Android desktop, or whatever your OEM calls it. Not HDMI. Not a TV.</p>
+<p>Pair <b>once per boot</b> with Wireless debugging (Shizuku works too), tap Start desktop, and the desktop fills the phone. Unfolded Folds go fullscreen; tabletop splits desktop on top and a trackpad below. Regular phones work in portrait or landscape.</p>
+<p><b>What you need</b></p>
+<ul>
+<li>A phone that already has a desktop mode</li>
+<li>The InnerDesk accessibility service, when asked</li>
+<li>Developer options → Wireless debugging, once this boot (no root)</li>
+</ul>
+<p>After the privileged daemon is up you can turn Wireless debugging off. Pair again after a reboot.</p>
+<p>Optional anonymous usage and crash reports (random id only) are off by default in this F-Droid build. Turn them on under About → Privacy if you want. Pairing PINs are never sent.</p>
+<p>Independent community project. Not affiliated with Samsung or Google. Use at your own risk.</p>

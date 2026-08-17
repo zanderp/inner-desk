@@ -1,0 +1,33 @@
+# Copy into fdroiddata as metadata/dev.zanderp.innerdesk.yml
+# https://gitlab.com/fdroid/fdroiddata
+#
+# F-Droid builds with -Pfdroid so anonymous telemetry is opt-in.
+
+Categories:
+  - System
+License: AGPL-3.0-or-later
+AuthorName: Alexandru
+AuthorWebSite: https://alexandru.rocks
+WebSite: https://alexandru.rocks
+SourceCode: https://github.com/zanderp/inner-desk
+IssueTracker: https://github.com/zanderp/inner-desk/issues
+Changelog: https://github.com/zanderp/inner-desk/releases
+Donate: https://ko-fi.com/alexandrupopa
+
+RepoType: git
+Repo: https://github.com/zanderp/inner-desk.git
+
+Builds:
+  - versionName: 0.8.0
+    versionCode: 50
+    commit: v0.8.0
+    subdir: app
+    gradle:
+      - yes
+    gradleprops:
+      - fdroid
+
+AutoUpdateMode: Version
+UpdateCheckMode: Tags
+CurrentVersion: 0.8.0
+CurrentVersionCode: 50
