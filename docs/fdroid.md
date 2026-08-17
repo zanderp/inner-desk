@@ -11,7 +11,7 @@ InnerDesk is FOSS (AGPL-3.0-or-later) and can go on F-Droid. Play Store is not a
 
 ## How F-Droid gets the app
 
-1. Push Fastlane + the `-Pfdroid` Gradle bits, and make sure tag `v0.8.1` (or the next version) points at that commit.
+1. Push Fastlane + the `-Pfdroid` Gradle bits, and make sure tag `v0.8.2` (or the next version) points at that commit.
 2. Open a packaging request: [fdroid/rfp](https://gitlab.com/fdroid/rfp/-/issues) **or** a merge request on [fdroiddata](https://gitlab.com/fdroid/fdroiddata) with `metadata/dev.zanderp.innerdesk.yml` copied from `docs/fdroid-metadata.yml`.
 3. Wait. New apps often take **weeks to a few months**. Reviewers build from source; they do not ship our GitHub APK.
 

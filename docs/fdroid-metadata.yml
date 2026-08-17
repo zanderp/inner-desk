@@ -18,9 +18,9 @@ RepoType: git
 Repo: https://github.com/zanderp/inner-desk.git
 
 Builds:
-  - versionName: 0.8.1
-    versionCode: 51
-    commit: v0.8.1
+  - versionName: 0.8.2
+    versionCode: 52
+    commit: v0.8.2
     subdir: app
     gradle:
       - yes
@@ -29,5 +29,5 @@ Builds:
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags
-CurrentVersion: 0.8.1
-CurrentVersionCode: 51
+CurrentVersion: 0.8.2
+CurrentVersionCode: 52

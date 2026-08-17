@@ -1,0 +1,1 @@
+Pixel (Android 16) and Samsung One UI 8 only. Other devices show unsupported and do not start desktop. Full one-time setup listed in-app.
