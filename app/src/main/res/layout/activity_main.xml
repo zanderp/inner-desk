@@ -77,6 +77,7 @@
                     android:textSize="13sp" />
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/setupCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -111,21 +112,11 @@
                             android:textSize="14sp" />
 
                         <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnDexSettings"
-                            style="@style/Widget.Material3.Button.TonalButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="52dp"
-                            android:layout_marginTop="14dp"
-                            android:text="@string/open_dex_settings"
-                            android:textAllCaps="false"
-                            app:cornerRadius="14dp" />
-
-                        <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnWireless"
                             style="@style/Widget.Material3.Button.OutlinedButton"
                             android:layout_width="match_parent"
                             android:layout_height="52dp"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="14dp"
                             android:text="@string/open_wireless_debug"
                             android:textAllCaps="false"
                             app:cornerRadius="14dp"

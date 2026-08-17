@@ -142,16 +142,4 @@ object DexStarter {
         }?.let { return it }
         return named.firstOrNull()?.displayId ?: pool.firstOrNull()?.displayId
     }
-
-    fun openDesktopSettings(context: Context) {
-        if (DexOverlayService.hasOverlay()) {
-            DexOverlayService.showSettingsPanel()
-            return
-        }
-        android.widget.Toast.makeText(
-            context,
-            "Start desktop, then use Desktop settings from the side menu.",
-            android.widget.Toast.LENGTH_LONG,
-        ).show()
-    }
 }

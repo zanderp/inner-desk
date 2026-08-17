@@ -4,9 +4,7 @@
     <string name="status_idle">Authorize once this boot, then Start desktop.</string>
     <string name="setup_title">Setup</string>
     <string name="log_title">Log</string>
-    <string name="open_dex_settings">Desktop settings</string>
     <string name="open_wireless_debug">Wireless debugging</string>
-    <string name="wireless_paired">Paired</string>
     <string name="wireless_connected">Connected to Wireless debugging</string>
     <string name="daemon_need_wireless">Turn on Wireless debugging and pair once so InnerDesk can start the daemon.</string>
     <string name="pairing_pin">6-digit pairing PIN</string>

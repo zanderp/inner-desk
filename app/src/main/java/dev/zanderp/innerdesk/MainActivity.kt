@@ -122,7 +122,6 @@ class MainActivity : AppCompatActivity() {
             ensureDaemon(openSettingsIfNeeded = true)
         }
 
-        binding.btnDexSettings.setOnClickListener { DexStarter.openDesktopSettings(this) }
         binding.btnWireless.setOnClickListener { openWirelessDebug() }
         binding.btnPair.setOnClickListener { pairAndSpawnDaemon() }
         binding.btnStart.setOnClickListener {
@@ -780,6 +779,7 @@ class MainActivity : AppCompatActivity() {
         }
         binding.pairingRow.isVisible = true
         binding.btnWireless.isVisible = true
+        binding.setupCard.isVisible = true
         if (pairingPort > 0) {
             binding.pairingHint.text =
                 "Pairing port $pairingPort. Wireless debugging → Pair with pairing code → type that PIN here."
@@ -1005,22 +1005,16 @@ class MainActivity : AppCompatActivity() {
             privOk -> "Privileged daemon ready. Start desktop."
             else -> "Start the privileged daemon once this boot (Wireless debugging), then Start desktop."
         }
-        val wirelessLive = WirelessAdb.live
-        val wirelessPaired = WirelessAdb.paired
+        val needPair = WirelessDebugUi.pairingNeeded()
+        binding.setupCard.isVisible = !privOk || needPair
         binding.connectionHint.text = when {
-            privOk && wirelessLive -> getString(R.string.wireless_connected)
-            wirelessLive || wirelessPaired -> getString(R.string.wireless_paired)
             WirelessDebugUi.needsPairing -> "Unpaired. Open Wireless debugging → Pair with pairing code, then enter the PIN."
             privOk -> "Daemon is running."
             else -> "Tap Wireless debugging once this boot. Expand the notification and type the PIN there."
         }
-        binding.btnWireless.text = when {
-            privOk && wirelessLive -> getString(R.string.wireless_connected)
-            wirelessLive || wirelessPaired -> getString(R.string.wireless_paired)
-            else -> getString(R.string.open_wireless_debug)
-        }
+        binding.btnWireless.text = getString(R.string.open_wireless_debug)
         binding.btnWireless.isVisible = true
-        if (!WirelessDebugUi.pairingNeeded()) {
+        if (!needPair) {
             hidePairingForm()
             WirelessDebugUi.clear(this)
         } else {
